@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", Arial, Helvetica, sans-serif;
+  --color-ink: #07060a;
+  --color-ink-soft: #100b16;
+  --color-paper: #f7f5f9;
+  --color-brand-purple: #7c4ce6;
+  --color-brand-blue: #3ca3f8;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    scroll-behavior: auto;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-ink);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  a {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    outline-color: var(--color-brand-blue);
+  }
+}
+
+@keyframes megaMenuReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes technologyMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.technology-marquee-track {
+  animation: technologyMarquee 82s linear infinite;
+  transform: translateZ(0);
+}
+
+.technology-marquee:hover
+  .technology-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .technology-marquee {
+    overflow-x: auto;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  .technology-marquee-track {
+    animation: none;
+  }
+}
