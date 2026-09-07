@@ -2,6 +2,7 @@ import { Header } from "@/components/layout";
 
 import {
   HeroSection,
+  SelectedWorkSection,
   ServicesSection,
   TechnologyStrip,
   WhoWeAreSection,
@@ -13,12 +14,10 @@ export default function HomePage() {
       <Header />
 
       <HeroSection />
-
       <TechnologyStrip />
-
       <WhoWeAreSection />
-
       <ServicesSection />
+      <SelectedWorkSection />
     </main>
   );
 }

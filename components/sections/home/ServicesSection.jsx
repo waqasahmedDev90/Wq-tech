@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import {
+  ArrowUpRight,
   Code2,
   LifeBuoy,
   Palette,
-  Plus,
   TrendingUp,
 } from "lucide-react";
 
@@ -22,9 +22,15 @@ const serviceIcons = {
   support: LifeBuoy,
 };
 
+const cardSurfaces = [
+  "bg-[#29262f]",
+  "bg-[#202a34]",
+  "bg-[#2b2730]",
+  "bg-[#202b31]",
+];
+
 export function ServicesSection() {
   const sectionRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   useServicesMotion(sectionRef);
 
@@ -32,10 +38,19 @@ export function ServicesSection() {
     <section
       ref={sectionRef}
       id="services"
-      className="overflow-clip bg-[#08070b] py-16 text-white max-md:py-14 max-sm:py-12"
+      className="relative overflow-clip bg-[#08070b] py-16 text-white max-md:py-14 max-sm:py-12"
       aria-labelledby="services-heading"
     >
-      <Container>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 12% 22%, rgba(124,76,230,0.13), transparent 27%), radial-gradient(circle at 88% 76%, rgba(60,163,248,0.1), transparent 25%)",
+        }}
+      />
+
+      <Container className="relative">
         <div className="grid grid-cols-[0.42fr_1.58fr] gap-10 max-md:grid-cols-1 max-md:gap-5">
           <p
             className="flex items-center gap-3 self-start text-[11px] font-semibold uppercase tracking-[0.18em] text-[#a98df4]"
@@ -48,176 +63,165 @@ export function ServicesSection() {
           <div data-services-heading>
             <h2
               id="services-heading"
-              className="max-w-[780px] text-[clamp(32px,3.3vw,48px)] font-medium leading-[1.14] tracking-[-0.04em]"
+              className="max-w-[780px] text-[clamp(32px,3.3vw,46px)] font-medium leading-[1.14] tracking-[-0.04em]"
             >
-              Everything your digital business needs,{" "}
+              Connected expertise for{" "}
               <span className="bg-gradient-to-r from-[#a77bf5] to-brand-blue bg-clip-text text-transparent">
-                connected in one team.
+                ambitious digital work.
               </span>
             </h2>
 
             <p className="mt-4 max-w-[650px] text-base leading-[1.75] text-white/55 max-sm:text-[15px]">
-              From the first idea to long-term growth, our specialists work
-              together instead of passing your project between disconnected
-              teams.
+              Strategy, experience, engineering, and growth come together as
+              one focused delivery team.
             </p>
           </div>
         </div>
 
-        <div
-          className="mt-11 flex h-[530px] gap-3 max-lg:h-auto max-lg:flex-col max-sm:mt-9"
-          data-services-grid
-        >
+        <div className="mt-10 max-sm:mt-8" data-services-stack>
           {homeServices.map((service, index) => {
-            const isActive = activeIndex === index;
             const Icon = serviceIcons[service.id];
 
             return (
               <article
                 key={service.id}
+                className="sticky top-[112px] mb-[16vh] h-[min(66vh,580px)] min-h-[500px] last:mb-0 max-xl:min-h-[470px] max-lg:static max-lg:mb-5 max-lg:h-auto max-lg:min-h-0"
                 data-service-card
-                className={cn(
-                  "relative min-w-0 basis-0 overflow-hidden rounded-[26px] border bg-[#100d15] transition-[flex-grow,height,border-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] max-lg:basis-auto max-sm:rounded-[22px]",
-                  isActive
-                    ? "border-white/30 max-lg:h-[390px] max-sm:h-[365px]"
-                    : "border-white/10 max-lg:h-[116px]",
-                )}
-                style={{ flexGrow: isActive ? 1.85 : 0.75 }}
-                onMouseEnter={() => setActiveIndex(index)}
+                style={{ zIndex: index + 1 }}
+                aria-labelledby={"service-title-" + service.id}
               >
-                <button
-                  type="button"
-                  className="group absolute inset-0 z-20 block size-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-brand-blue"
-                  aria-expanded={isActive}
-                  aria-label={"Show " + service.title + " services"}
-                  onClick={() => setActiveIndex(index)}
-                  onFocus={() => setActiveIndex(index)}
+                <div
+                  className={cn(
+                    "relative grid size-full grid-cols-[0.76fr_0.9fr_1.14fr] overflow-hidden rounded-[30px] border border-white/10 p-[clamp(22px,2.3vw,36px)] shadow-[0_30px_90px_rgba(0,0,0,0.42)] will-change-transform max-lg:grid-cols-1 max-lg:rounded-[24px]",
+                    cardSurfaces[index],
+                  )}
+                  data-service-card-inner
                 >
-                  <span className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-6 max-sm:p-5">
-                    <span className="flex items-center gap-3">
-                      <span className="text-[11px] font-semibold tracking-[0.16em] text-white/55">
+                  {/* LEFT COLUMN */}
+                  <div
+                    className="relative z-10 flex min-w-0 flex-col border-r border-white/10 pr-[clamp(24px,2.5vw,40px)] max-lg:border-r-0 max-lg:pr-0"
+                    data-service-copy
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-[12px] font-semibold tracking-[0.16em] text-[#b99cff]">
                         {service.number}
                       </span>
 
-                      <span
-                        className={cn(
-                          "grid size-9 place-items-center rounded-full border transition-colors duration-500",
-                          isActive
-                            ? "border-brand-blue/55 bg-brand-blue/15 text-brand-blue"
-                            : "border-white/15 bg-black/15 text-white/65",
-                        )}
-                      >
+                      <span className="h-px w-9 bg-gradient-to-r from-brand-purple to-brand-blue" />
+                    </div>
+
+                    <div className="mt-10 max-xl:mt-8 max-lg:mt-7">
+                      <div className="mb-5 grid size-11 place-items-center rounded-full border border-white/15 bg-black/10 text-[#48a9ff]">
                         <Icon
-                          className="size-[17px]"
+                          className="size-5"
                           strokeWidth={1.7}
                           aria-hidden="true"
                         />
-                      </span>
-                    </span>
+                      </div>
 
-                    <span
-                      className={cn(
-                        "grid size-10 place-items-center rounded-full border transition-[background-color,border-color,color,transform] duration-500",
-                        isActive
-                          ? "border-brand-purple bg-brand-purple text-white"
-                          : "border-white/20 bg-black/15 text-white/75 group-hover:border-white/40",
-                      )}
-                      data-service-magnetic
+                      <h3
+                        id={"service-title-" + service.id}
+                        className="text-[clamp(30px,3vw,43px)] font-semibold leading-[1.05] tracking-[-0.04em]"
+                      >
+                        {service.title}
+                      </h3>
+
+                      <p className="mt-5 max-w-[330px] text-base leading-[1.65] text-white/68 max-xl:text-[15px]">
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-auto flex items-center gap-3 pt-8 text-[12px] font-semibold uppercase tracking-[0.15em] text-white/42 max-lg:mt-8 max-lg:pt-0">
+                      <span>Full-service capability</span>
+                    </div>
+                  </div>
+
+                  {/* CENTRE IMAGE */}
+                  <div
+                    className="relative mx-[clamp(22px,2.4vw,38px)] min-h-0 overflow-hidden rounded-[22px] max-lg:mx-0 max-lg:mt-8 max-lg:h-[340px] max-sm:h-[280px] max-sm:rounded-[18px]"
+                    data-service-image
+                  >
+                    <div
+                      className="absolute -inset-y-[8%] inset-x-0 will-change-transform"
+                      data-service-image-parallax
                     >
-                      <Plus
-                        className={cn(
-                          "size-[18px] transition-transform duration-500",
-                          isActive ? "rotate-45" : "rotate-0",
-                        )}
-                        aria-hidden="true"
+                      <Image
+                        src={service.image}
+                        alt={service.imageAlt}
+                        fill
+                        priority={index === 0}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        quality={76}
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                        className="scale-[1.08] object-cover"
                       />
-                    </span>
-                  </span>
+                    </div>
 
-                  <span className="absolute inset-x-0 bottom-0 z-10 block p-6 max-sm:p-5">
-                    <span
-                      className={cn(
-                        "block font-medium leading-[1.08] tracking-[-0.035em] text-white transition-[font-size,color] duration-500",
-                        isActive
-                          ? "text-[clamp(28px,2.7vw,40px)]"
-                          : "text-[clamp(22px,2vw,29px)] text-white/80",
-                      )}
-                    >
-                      {service.title}
-                    </span>
+                    <div
+                      className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,7,11,0.02)_45%,rgba(8,7,11,0.48)_100%)]"
+                      aria-hidden="true"
+                    />
 
-                    <span
-                      className={cn(
-                        "grid overflow-hidden transition-[grid-template-rows,opacity,margin] duration-500 ease-out",
-                        isActive
-                          ? "mt-4 grid-rows-[1fr] opacity-100 delay-150"
-                          : "mt-0 grid-rows-[0fr] opacity-0 delay-0",
-                      )}
-                    >
-                      <span className="min-h-0">
-                        <span className="block max-w-[600px] text-[14px] leading-[1.7] text-white/70">
-                          {service.description}
+                    <span className="absolute bottom-5 left-5 rounded-full border border-white/20 bg-black/30 px-3 py-1.5 text-[11px] font-semibold tracking-[0.12em] text-white/80 backdrop-blur-sm">
+                      {String(index + 1).padStart(2, "0")} /{" "}
+                      {String(homeServices.length).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  {/* RIGHT COLUMN */}
+                  <div className="relative z-10 flex min-w-0 flex-col border-l border-white/10 pl-[clamp(26px,2.8vw,44px)] max-lg:mt-8 max-lg:border-l-0 max-lg:border-t max-lg:pl-0 max-lg:pt-8">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <span className="text-[11px] font-semibold uppercase tracking-[0.17em] text-[#b99cff]">
+                          What we deliver
                         </span>
 
-                        <span className="mt-4 flex flex-wrap gap-2">
-                          {service.services.map((item) => (
-                            <span
-                              key={item}
-                              className="rounded-full border border-white/20 bg-black/15 px-3 py-1.5 text-[12px] leading-none text-white/75"
-                            >
-                              {item}
-                            </span>
-                          ))}
-                        </span>
+                        <p className="mt-2 text-[14px] text-white/45">
+                          Focused expertise, delivered as one team.
+                        </p>
+                      </div>
+
+                      <span className="rounded-full border border-white/12 bg-black/10 px-3 py-1.5 text-[11px] font-medium text-white/55">
+                        04 capabilities
                       </span>
-                    </span>
+                    </div>
+
+                    <ul className="mt-7 border-t border-white/12">
+                      {service.services.map((item, itemIndex) => (
+                        <li
+                          key={item}
+                          className="group flex items-center gap-4 border-b border-white/12 py-[clamp(13px,1.7vh,18px)]"
+                        >
+                          <span className="w-5 shrink-0 text-[11px] font-semibold text-white/35">
+                            {String(itemIndex + 1).padStart(2, "0")}
+                          </span>
+
+                          <span className="min-w-0 flex-1 text-[15px] font-medium text-white/82">
+                            {item}
+                          </span>
+
+                          <ArrowUpRight
+                            className="size-4 shrink-0 text-[#54acff] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            strokeWidth={1.8}
+                            aria-hidden="true"
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* BACKGROUND NUMBER */}
+                  <span
+                    className="pointer-events-none absolute -right-3 -top-14 text-[170px] font-semibold leading-none tracking-[-0.08em] text-white/[0.025] max-lg:hidden"
+                    aria-hidden="true"
+                  >
+                    {service.number}
                   </span>
-                </button>
-
-                <div
-                  className="absolute -inset-y-[7%] inset-x-0 will-change-transform"
-                  data-service-parallax
-                  aria-hidden="true"
-                >
-                  <Image
-                    src={service.image}
-                    alt=""
-                    fill
-                    loading="eager"
-                    quality={78}
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className={cn(
-                      "object-cover transition-[filter,opacity,transform] duration-700 ease-out",
-                      isActive
-                        ? "scale-100 opacity-100 grayscale-0"
-                        : "scale-[1.07] opacity-60 grayscale-[55%]",
-                    )}
-                  />
                 </div>
-
-                <div
-                  className={cn(
-                    "pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(8,7,11,0.28)_0%,rgba(8,7,11,0.18)_34%,rgba(8,7,11,0.96)_100%)] transition-opacity duration-700",
-                    isActive ? "opacity-100" : "opacity-95",
-                  )}
-                  aria-hidden="true"
-                />
-
-                <div
-                  className={cn(
-                    "pointer-events-none absolute inset-x-0 top-0 z-10 h-[2px] origin-left bg-gradient-to-r from-brand-purple to-brand-blue transition-transform duration-700",
-                    isActive ? "scale-x-100" : "scale-x-0",
-                  )}
-                  aria-hidden="true"
-                />
               </article>
             );
           })}
         </div>
-
-        <p className="mt-5 text-right text-[12px] text-white/35 max-lg:hidden">
-          Hover or select a service to explore
-        </p>
       </Container>
     </section>
   );
