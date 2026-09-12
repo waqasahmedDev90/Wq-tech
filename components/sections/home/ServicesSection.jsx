@@ -63,7 +63,7 @@ export function ServicesSection() {
           <div data-services-heading>
             <h2
               id="services-heading"
-              className="max-w-[780px] text-[clamp(32px,3.3vw,46px)] font-medium leading-[1.14] tracking-[-0.04em]"
+              className="max-w-195 text-[clamp(32px,3.3vw,46px)] font-medium leading-[1.14] tracking-[-0.04em]"
             >
               Connected expertise for{" "}
               <span className="bg-gradient-to-r from-[#a77bf5] to-brand-blue bg-clip-text text-transparent">

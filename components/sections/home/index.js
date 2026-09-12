@@ -4,3 +4,4 @@ export { WhoWeAreSection } from "./WhoWeAreSection";
 export { ServicesSection } from "./ServicesSection";
 export { SelectedWorkSection } from "./SelectedWorkSection";
 export { ServicesWorkSection } from "./ServicesWorkSection";
+export { OurProcessSection } from "./OurProcessSection";
