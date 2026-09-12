@@ -1,12 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  Search,
-  Route,
-  PenTool,
-  Rocket,
-} from "lucide-react";
+import { Search, Route, PenTool, Rocket } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { processSteps } from "@/data/processSteps";
@@ -39,7 +34,6 @@ export function OurProcessSection() {
                 aria-hidden="true"
                 className="h-px w-8 bg-gradient-to-r from-[#814be8] to-[#389be8]"
               />
-
               Our process
             </p>
 
@@ -49,17 +43,15 @@ export function OurProcessSection() {
             >
               A clear process.
               <br />
-
-              <span className="text-[#7543d0]">
+              <span className="inline-block bg-gradient-to-r from-[#7C3AED] via-[#6964F1] to-[#3BA7F5] bg-clip-text text-transparent">
                 A stronger outcome.
               </span>
             </h2>
           </div>
 
           <p className="max-w-[470px] text-[15px] leading-[1.75] text-[#6b6376]">
-            From the first conversation to the next improvement,
-            we keep the work connected and you involved at every
-            step.
+            From the first conversation to the next improvement, we keep the
+            work connected and you involved at every step.
           </p>
         </div>
 
@@ -69,8 +61,7 @@ export function OurProcessSection() {
         >
           {processSteps.map((step, index) => {
             const Icon = processIcons[step.id];
-            const isLastStep =
-              index === processSteps.length - 1;
+            const isLastStep = index === processSteps.length - 1;
 
             return (
               <li
@@ -101,8 +92,7 @@ export function OurProcessSection() {
 
                 <div className="relative min-w-0 pt-1 lg:pt-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7a6b8a]">
-                    Step{" "}
-                    {String(index + 1).padStart(2, "0")}
+                    Step {String(index + 1).padStart(2, "0")}
                   </p>
 
                   <h3 className="mt-2 text-[22px] font-medium leading-[1.3] tracking-[-0.025em]">

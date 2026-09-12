@@ -3,6 +3,7 @@ import { Header } from "@/components/layout";
 import {
   HeroSection,
   OurProcessSection,
+  ResultsSection,
   ServicesSection,
   SelectedWorkSection,
   TechnologyStrip,
@@ -25,6 +26,8 @@ export default function HomePage() {
       <SelectedWorkSection />
 
       <OurProcessSection />
+
+      <ResultsSection />
     </main>
   );
 }
